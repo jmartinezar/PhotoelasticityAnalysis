@@ -2,10 +2,10 @@
 
 The present repository contain the code to analysis light that pass through an acrylic sheet to determinate characteristics of it polarization. In it, a set of images are processes, data is extrac them and is plot for parse of it. A breif report is present to clear a bit the process.
 
-## Programming language using
+## Software used
 
-``Python``
+- Python 3.6.9
 
-## Automate software
+- GNU Make 4.1
 
-``GNU Make``
+- pdflatex 3.14159265-2.6-1.40.18
