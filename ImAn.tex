@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+
+\title{Photoelaticity}
+
+\begin{document}
+
+\maketitle
+
+\noindent Let us consider an electromagnetic wave with wavelength $\lambda$ and angular frequency $\omega$ propagating in the $\hat{z}$ direction. The electric field can be represented as
+\begin{equation}
+E(x,y,z;t) = \{E_{0x}e^{i\delta_x}, E_{0y}e^{i\delta_y}\}e^{i(2\pi z/\lambda - \omega t)}.
+\end{equation}
+
+\noindent The polarization state of the wave is determined by the complex amplitudes of its components. The evolution of the tip of the electric vector projected on the $z=0$ plane is given by
+\begin{equation}
+\frac{E_x^2}{|E_{0x}|^2} + \frac{E_y^2}{|E_{0y}|^2} - 2\frac{E_x}{|E_{0x}|}\frac{E_y}{|E_{0y}|}\cos(\Delta \delta) + \frac{E_y^2}{|E_{0y}|^2} = \sin^2(\Delta \delta),
+\end{equation}
+where $\Delta \delta = \delta_y - \delta_x$ is the phase difference between the two components of the electric vector. If
+
+\begin{itemize}
+    \item $\Delta \delta = m\pi$, with $m$ integer, the polarization state is linear.
+    \item $\Delta \delta = (2m-1)\pi/2$, with $m$ integer, the polarization state is elliptical or circular. The axes of the ellipse are in the horizontal ($E_x$) and vertical ($E_y$) directions.
+    \item $\Delta \delta$ has another value, the polarization state is a rotated ellipse. The rotation angle $\gamma$ of the major axis is given by
+    \begin{equation}
+    \tan 2\gamma = \tan 2\alpha \cos \Delta \delta,
+    \end{equation}
+    where $\tan \alpha = \left|\frac{E_{0y}}{E_{0x}}\right|$.
+\end{itemize}
+
+\end{document}
