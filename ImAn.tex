@@ -1,4 +1,6 @@
 \documentclass{article}
+
+\usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
@@ -8,6 +10,8 @@
 \begin{document}
 
 \maketitle
+
+\section{Introduction}
 
 \noindent Let us consider an electromagnetic wave with wavelength $\lambda$ and angular frequency $\omega$ propagating in the $\hat{z}$ direction. The electric field can be represented as
 \begin{equation}
@@ -29,5 +33,38 @@ where $\Delta \delta = \delta_y - \delta_x$ is the phase difference between the 
     \end{equation}
     where $\tan \alpha = \left|\frac{E_{0y}}{E_{0x}}\right|$.
 \end{itemize}
+
+\section{Data and analysis}
+
+For linearly polarized light passing through a phase-shifting sheet (such as an acrylic sheet), the light becomes elliptically polarized. To determine the polarization state parameters, such as the azimuthal angle $\gamma$ or the eccentricity $e$, we can place a linear polarizing filter at an angle $\theta$ relative to the horizontal and record the resulting light by capturing a photograph with a cellphone camera. The angle $\theta$ varies from 0 to 360 degrees, and the images are stored in the \textbf{data} directory. Data analysis allowed us to obtain the parameters that define the elliptical polarization state by fitting an elliptical function to the inscribed ellipse. A window of pixels is averaged to obtain data for a zone selected by ocular inspection of the images, with the center point located at pixel (510, 996). The result of the fit is shown in Figure \ref{1}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\linewidth]{1_polar_E.pdf}
+  \caption{Plot of data and elliptical fit to data of 1 zone.}
+  \label{1}
+\end{figure}
+
+Parameters values are shown in Table \ref{t1}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Color & R & G & B \\
+\hline
+$E_{\text{max}}$ & 189.54 & 206.5 & 198.59 \\
+$E_{\text{min}}$ & 4.12 & 92.32 & 70.76 \\
+$e$              & 0.999 & 0.894 & 0.934 \\
+$\psi$           & $-23.35^\circ$ & $31.48^\circ$ & $60.39^\circ$ \\
+\hline
+\end{tabular}
+\label{t1}
+\caption{Polarization state parameters get of data analysis.}
+\end{table}
+
+\section{Conclusions}
+
+Using a data analysis Python program is posible get polarization state parameters of elliptical polarized light that had been passing through a linear polarizing filter.
 
 \end{document}

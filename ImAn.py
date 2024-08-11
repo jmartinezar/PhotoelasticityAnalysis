@@ -16,7 +16,7 @@ def tw(x, s, max, min):
   return np.arctan(max*np.sin(x - s)/(min*np.cos(x - s)))
 
 '''
-
+Elliptical function
 '''
 def ellipse(x, s, max, min):
   return np.sqrt( (max*np.cos(tw(x, s, max, min)))**2  + (min*np.sin(tw(x, s, max, min)))**2 )
@@ -26,21 +26,16 @@ Define function to read image to folder
 '''
 def read_to_folder(directory, x, y, m):
   results = []
-  # Leer archivos en la carpeta
   for File in os.listdir(directory):
       if File.startswith('Fotoelasticidad_') and File.endswith('.jpeg'):
-          # Obtener el número del nombre del archivo
           number = int(File.split('_')[1].split('.')[0])
 
-          # Construir la ruta completa del archivo
           file_path = os.path.join(directory, File)
 
-          # Leer la imagen en escala de grises
           image = cv2.imread(file_path, cv2.IMREAD_COLOR)
 
           blue_channel, green_channel, red_channel = cv2.split(image)
 
-          # Calcular el promedio de los pixeles en la ventana centrada en (x,y)
           window_b = blue_channel[y - m // 2:y + m // 2 + 1, x - m // 2:x + m // 2 + 1]
           mean_b = np.mean(window_b)
 
@@ -50,28 +45,23 @@ def read_to_folder(directory, x, y, m):
           window_r = red_channel[y - m // 2:y + m // 2 + 1, x - m // 2:x + m // 2 + 1]
           mean_r = np.mean(window_r)
 
-          # Guardar el número y el promedio en la lista de resultados
           results.append([number, mean_b, mean_g, mean_r])
 
-  # Convertir la lista de resultados a un arreglo de Numpy
   results = np.array(results)
   return results
 
 '''
-
+Get the data for directory
 '''
 
 def obtain_data(directory, x, y, m):
-  # Lista para almacenar los resultados
   results = []
 
   results = read_to_folder(directory, x, y, m)
 
-  # Ordenar resultados ascendente por la primera columna (número)
   order_index = np.argsort(results[:, 0])
   results = results[order_index]
 
-  # Ajustar los datos usando minimize
   x_data = results[:, 0]
   y_data_b = results[:, 1]
   y_data_g = results[:, 2]
@@ -79,7 +69,7 @@ def obtain_data(directory, x, y, m):
   return x_data, y_data_b, y_data_g, y_data_r
 
 '''
-
+Fit data to elliptical function
 '''
 
 def plot_fit(x_range, x_data, y_data, fit_funct, name, c, coor='cartesian', axis=None):
@@ -93,6 +83,8 @@ def plot_fit(x_range, x_data, y_data, fit_funct, name, c, coor='cartesian', axis
   E_max = max(y_data)
   fit_params, covariance = curve_fit(lambda x, s: fit_funct(x, s, E_max, E_min), x_data, y_data)
   s_r = fit_params
+  ex = np.sqrt(1 - E_min*E_min/(E_max*E_max))
+  print(E_max, " & ", E_min, " & ", ex, " & ", np.rad2deg(s_r[0]), " \\ \n")
   y_fit = ellipse(x_range, s_r, E_max, E_min)
   if(coor == 'cartesian'):
     plt.plot(x_range, y_fit, '-', label=name, color=c)
@@ -100,6 +92,7 @@ def plot_fit(x_range, x_data, y_data, fit_funct, name, c, coor='cartesian', axis
     axis[index].plot(x_range, y_fit, '-', label=name, color=c)
   
 '''
+Plot data and fit
 '''
 
 def print_results(x_data, y_data_b, y_data_g, y_data_r, zone, fit_function, coor = 'cartesian'):
@@ -137,4 +130,3 @@ def print_results(x_data, y_data_b, y_data_g, y_data_r, zone, fit_function, coor
 
   plt.grid(True)
   plt.savefig(file_name, format='pdf')
-  plt.show()
